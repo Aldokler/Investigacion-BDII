@@ -16,6 +16,7 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import java.io.IOException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.HttpHost;
@@ -38,12 +39,73 @@ public class test {
      */
     public static void main(String[] args) throws IOException, InterruptedException{
         System.out.println("Test");
-        List<Person> maes = findByName("Ingrid");
+        lineas b = new lineas();
+        b.setVisible(true);
+        List<Person> maes = findByName("Jose");
         System.out.println("There are " + maes.size() + " results");
         maes.forEach(mae -> {
-            System.out.println(mae);
+            System.out.println(mae.id);
         });
         System.out.println("Test");
+    }
+    //para calcular por cedula de un nombre en especifico la provincia, devuelve UsuarioProvincia
+    //con la provincia y la cantidad de apariciones
+    // ejemplo
+    //Ingrid en San Jose hay 400 personas con ese nombre
+    public static ArrayList getProvPorNombre(String nombre){
+        List<Person> personas = findByName(nombre);
+        ArrayList count = new ArrayList();
+        int actual = 1;
+        while(actual <10){
+            int cantidadPersonas = 0;
+            for(int i =0;i<personas.size();i++){
+                if((personas.get(i).id)/100000000 == actual)
+                    cantidadPersonas++;
+            }
+            UsuariosProvincia p = new UsuariosProvincia(cantidadPersonas, getProvincia(actual));
+            count.add(p);
+            actual++;
+        }
+        return count;
+    }
+    //para obtener la provincia segun la cedula, recibe el primer digito
+    public static String getProvincia(int i){
+        switch(i){
+            case 1: return "San Jose";
+            case 2: return "Alajuela";
+            case 3: return "Cartago";
+            case 4: return "Heredia";
+            case 5: return "Guanacaste";
+            case 6: return "Puntarenas";
+            case 7: return "Limon";
+            case 8: return "Nacionalizado";
+            case 9: return "especial";
+        }
+        return "n";
+    }
+    //genera las n personas por decada
+    public static ArrayList countPorEdad(String nombre){
+    ArrayList conteo = new ArrayList();
+    List<Person> persons = findByName(nombre);
+    int decada = 1930;
+    while(decada<2030){
+        int cantidad =0;
+        for(int i =0;i<persons.size();i++){
+            int anio = persons.get(i).birthdate[2];
+            if( anio <  decada && decada<(decada + 10)){
+                cantidad++;
+            }
+        }
+        if(cantidad>0){
+            UsuariosProvincia p = new UsuariosProvincia(cantidad, String.valueOf(decada));
+            conteo.add(p);
+        }
+        decada+=10;
+        cantidad = 0;
+    }
+    
+    
+    return conteo;
     }
     
     //Carga el username y la password
