@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package test;
+package view;
 
+import logic.UsuariosProvincia;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -12,6 +13,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import test.test;
 
 /**
  *
@@ -19,13 +21,14 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class lineas extends javax.swing.JFrame {
     JFreeChart barras;
+    String nombre = "";
     DefaultCategoryDataset datos = new DefaultCategoryDataset();
     /**
      * Creates new form pastel
      */
-    public lineas() {
+    public lineas(String name) {
         initComponents();
-        String nombre = "Jose";
+        String nombre = name;
         ArrayList numeros = test.countPorEdad(nombre);
         int num;
         String prov;
@@ -36,7 +39,7 @@ public class lineas extends javax.swing.JFrame {
             datos.addValue(num, "Cantidad", prov);
         }
         
-        barras = ChartFactory.createLineChart("Personas por generacion con nombre"+ nombre, 
+        barras = ChartFactory.createLineChart("Personas por generacion con nombre  "+ nombre, 
                 "Edad", "Cantidad", datos, PlotOrientation.VERTICAL, true, true, true);
         grafico();
         
@@ -63,6 +66,12 @@ public class lineas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -93,6 +102,10 @@ public class lineas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -125,7 +138,7 @@ public class lineas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new lineas().setVisible(true);
+                new lineas("").setVisible(true);
             }
         });
     }

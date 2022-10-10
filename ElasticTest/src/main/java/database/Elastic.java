@@ -1,13 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package test;
+package database;
 
-import view.lineas;
-import logic.UsuariosProvincia;
-import logic.Person;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.ElasticsearchException;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
@@ -30,24 +26,15 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
-import view.search;
+import logic.Person;
+import logic.UsuariosProvincia;
 
 /**
  *
- * @author Aldokler
+ * @author Sharon
  */
-public class test {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws IOException, InterruptedException{
-        search search = new search();
-        search.setLocationRelativeTo(null);
-        search.setVisible(true);
-       
-
-    }
+public class Elastic {
+    
     //para calcular por cedula de un nombre en especifico la provincia, devuelve UsuarioProvincia
     //con la provincia y la cantidad de apariciones
     // ejemplo
@@ -108,31 +95,7 @@ public class test {
     return conteo;
     }
     
-    //Carga el username y la password
-    private static CredentialsProvider credentialsProvider(){
-        final CredentialsProvider credentialsProvider =
-            new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY,
-            new UsernamePasswordCredentials("elastic", "LIlCEld2NGrC6X6Fva4EFqud"));
-        return credentialsProvider;
-    };
-    
-    //Carga el link de la base http y el puerto
-    private static final RestClientBuilder builder = RestClient.builder(
-        new HttpHost("investigacio-n-bdii.es.us-central1.gcp.cloud.es.io", 9243, "https"))
-        .setHttpClientConfigCallback((HttpAsyncClientBuilder httpClientBuilder) -> httpClientBuilder
-                .setDefaultCredentialsProvider(credentialsProvider()));
-    
-    // Create the low-level client
-    private static final RestClient restClient = builder.build();
-
-    // Create the transport with a Jackson mapper
-    private static final ElasticsearchTransport transport = new RestClientTransport(
-        restClient, new JacksonJsonpMapper());
-
-    // And create the API client
-    private static final ElasticsearchClient client = new ElasticsearchClient(transport);
-    
+   
     //Funcion que retorna las personas con el nombre name
     public static List<Person> findByName (String name){
             List<Person> results = new ArrayList<>();
@@ -208,4 +171,30 @@ public class test {
             }
             return results;  
     }
+    
+    
+    //Carga el username y la password
+    private static CredentialsProvider credentialsProvider(){
+        final CredentialsProvider credentialsProvider =
+            new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY,
+            new UsernamePasswordCredentials("elastic", "LIlCEld2NGrC6X6Fva4EFqud"));
+        return credentialsProvider;
+    };
+    
+    //Carga el link de la base http y el puerto
+    private static final RestClientBuilder builder = RestClient.builder(
+        new HttpHost("investigacio-n-bdii.es.us-central1.gcp.cloud.es.io", 9243, "https"))
+        .setHttpClientConfigCallback((HttpAsyncClientBuilder httpClientBuilder) -> httpClientBuilder
+                .setDefaultCredentialsProvider(credentialsProvider()));
+    
+    // Create the low-level client
+    private static final RestClient restClient = builder.build();
+
+    // Create the transport with a Jackson mapper
+    private static final ElasticsearchTransport transport = new RestClientTransport(
+        restClient, new JacksonJsonpMapper());
+
+    // And create the API client
+    private static final ElasticsearchClient client = new ElasticsearchClient(transport);
 }

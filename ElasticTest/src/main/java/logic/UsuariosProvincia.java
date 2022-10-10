@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package test;
+package logic;
 
 /**
  *
  * @author jeffr
  */
 public class UsuariosProvincia {
-    int cantidad;
-    String nombreProvincia;
+    public int cantidad;
+    public String nombreProvincia;
 
     public UsuariosProvincia() {
     }
