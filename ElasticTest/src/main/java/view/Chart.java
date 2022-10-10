@@ -12,7 +12,7 @@ import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
- * @author Sharon
+ * code taken from https://jonathanmelgoza.com/blog/como-hacer-graficos-con-java/
  */
 public class Chart {
      public Chart(int[] list){
