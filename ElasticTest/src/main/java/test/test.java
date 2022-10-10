@@ -32,6 +32,7 @@ import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import view.Chart;
+import view.Statistics;
 import view.search;
 
 /**
@@ -49,7 +50,7 @@ public class test {
        // search.setVisible(true);
        
       Chart a = new Chart(Elastic.peoplePerP());
-
+      
         
          
        
@@ -99,16 +100,13 @@ public class test {
         int cantidad =0;
         for(int i =0;i<persons.size();i++){
             int anio = persons.get(i).birthdate[2];
-            if( anio <  decada && decada<(decada + 10)){
+            if( decada <  anio && anio <(decada + 10)){
                 cantidad++;
             }
         }
-        if(cantidad>0){
             UsuariosProvincia p = new UsuariosProvincia(cantidad, String.valueOf(decada));
             conteo.add(p);
-        }
-        decada+=10;
-        cantidad = 0;
+            decada+=10;
     }
     
     

@@ -4,6 +4,7 @@
  */
 package logic;
 
+import view.Statistics;
 import view.search;
 
 /**
@@ -15,6 +16,11 @@ public class Main {
         search search = new search();
         search.setLocationRelativeTo(null);
         search.setVisible(true);
+        
+
+        //Statistics search = new Statistics();
+        //search.setLocationRelativeTo(null);
+        //search.setVisible(true);
         
     }
 }
