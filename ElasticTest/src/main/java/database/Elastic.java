@@ -145,6 +145,42 @@ public class Elastic {
             }
             return results;  
     }
+    
+    
+     //Funcion que retorna las personas con el id id
+    public static List<Person> findByIdP (){
+            List<Person> results = new ArrayList<>();
+            try{
+                SearchResponse<Person> response = client.search(s -> s
+                    .index("person")
+                    .size(101000)
+                    ,
+                    Person.class      
+                );
+                List<Hit<Person>> hits = response.hits().hits();
+                for (Hit<Person> hit: hits) {
+                    results.add(hit.source());
+                }
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            return results;  
+    }
+    
+    public static int[] peoplePerP(){
+        List<Person> people = findByIdP();
+        int[] results = new int[] {0, 0, 0,0, 0, 0,0,0,0};
+   
+        for (Person person: people) {
+            String id = String.valueOf(person.getId());
+            char[] charArr = id.toCharArray();
+            
+            int i = Integer.parseInt(String.valueOf(charArr[0]))-1;
+            results[i]++;
+        }
+        
+        return results;
+    }
    
     //1930 a 2020
     //Funcion que retorna las personas que nacieron en el año age

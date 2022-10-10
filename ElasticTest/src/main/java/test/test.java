@@ -18,6 +18,7 @@ import co.elastic.clients.elasticsearch.core.search.TotalHitsRelation;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
+import database.Elastic;
 import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
+import view.Chart;
 import view.search;
 
 /**
@@ -42,9 +44,14 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, InterruptedException{
-        search search = new search();
-        search.setLocationRelativeTo(null);
-        search.setVisible(true);
+       // search search = new search();
+       // search.setLocationRelativeTo(null);
+       // search.setVisible(true);
+       
+      Chart a = new Chart(Elastic.peoplePerP());
+
+        
+         
        
 
     }
