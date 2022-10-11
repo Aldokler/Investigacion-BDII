@@ -63,6 +63,7 @@ public class people extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 204, 255));
 
         jlist.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jlist.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jlist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jlistValueChanged(evt);
