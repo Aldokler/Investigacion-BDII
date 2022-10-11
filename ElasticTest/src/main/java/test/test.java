@@ -86,8 +86,8 @@ public class test {
             case 5: return "Guanacaste";
             case 6: return "Puntarenas";
             case 7: return "Limon";
-            case 8: return "Nacionalizado";
-            case 9: return "especial";
+            case 8: return "Nacionalized";
+            case 9: return "Special";
         }
         return "n";
     }

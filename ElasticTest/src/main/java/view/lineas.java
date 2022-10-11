@@ -36,11 +36,11 @@ public class lineas extends javax.swing.JFrame {
             UsuariosProvincia p = (UsuariosProvincia) numeros.get(i);
             num = p.cantidad;
             prov = p.nombreProvincia;
-            datos.addValue(num, "Cantidad", prov);
+            datos.addValue(num, "Amount", prov);
         }
         
-        barras = ChartFactory.createLineChart("Personas por generacion con nombre  "+ nombre, 
-                "Edad", "Cantidad", datos, PlotOrientation.VERTICAL, true, true, true);
+        barras = ChartFactory.createLineChart("People per generation named"+ nombre, 
+                "Age", "Amount", datos, PlotOrientation.VERTICAL, true, true, true);
         grafico();
         
     }

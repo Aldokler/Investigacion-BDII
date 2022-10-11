@@ -40,12 +40,12 @@ public class barras extends javax.swing.JFrame {
             UsuariosProvincia p = (UsuariosProvincia) numeros.get(i);
             num = p.cantidad;
             prov = p.nombreProvincia;
-            datos.addValue(num, "Cantidad", prov);
+            datos.addValue(num, "Amount", prov);
         }
         
         
-        barras = ChartFactory.createBarChart("Personas por provincia con nombre "+ nombre, 
-                "Provincia", "Cantidad", datos, PlotOrientation.VERTICAL, true, true, true);
+        barras = ChartFactory.createBarChart("People per province named "+ nombre, 
+                "Province", "Amount", datos, PlotOrientation.VERTICAL, true, true, true);
         grafico();
         
     }
