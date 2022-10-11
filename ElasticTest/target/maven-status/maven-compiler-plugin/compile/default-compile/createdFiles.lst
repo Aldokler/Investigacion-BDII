@@ -6,6 +6,7 @@ view\Statistics.class
 logic\Controller.class
 view\people$1.class
 view\search$1.class
+view\Statistics$5.class
 view\lineas$1.class
 database\Elastic.class
 view\lineas.class
@@ -26,4 +27,5 @@ view\Statistics$2.class
 test\test.class
 view\people$3.class
 view\PersonInformation$2.class
+view\search$3.class
 view\search.class

@@ -107,6 +107,17 @@ public class PersonInformation extends javax.swing.JFrame {
         jLabel5.setText("Birth Date");
 
         id.setBackground(new java.awt.Color(255, 255, 255));
+        id.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        fullname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        age.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        status.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        birth.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        death.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         button1.setBackground(new java.awt.Color(0, 102, 153));
         button1.setLabel("Close");
@@ -118,6 +129,8 @@ public class PersonInformation extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("Nation");
+
+        nation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
