@@ -31,11 +31,11 @@ public class Chart {
         data.setValue((list[4]*100)/sum + "% " + " Guanacaste : "+ list[4], list[4]);
         data.setValue((list[5]*100)/sum + "% " + " Puntarenas : "+ list[5], list[5]);
         data.setValue((list[6]*100)/sum + "% " + " Limón : "+ list[6], list[6]);
-        data.setValue((list[7]*100)/sum + "% " + " Nacionalizado : "+ list[7], list[7]);
-        data.setValue((list[8]*100)/sum + "% " + " Nacimienos especiales : "+ list[8], list[8]);
+        data.setValue((list[7]*100)/sum + "% " + " Nationalized : "+ list[7], list[7]);
+        data.setValue((list[8]*100)/sum + "% " + " Special case : "+ list[8], list[8]);
         // Creando el Grafico
         JFreeChart chart = ChartFactory.createPieChart(
-         "Ejemplo Rapido de Grafico en un ChartFrame", 
+         "Amount of people per province", 
          data, 
          true, 
          true, 
