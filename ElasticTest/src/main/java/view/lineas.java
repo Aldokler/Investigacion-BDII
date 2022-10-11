@@ -39,7 +39,7 @@ public class lineas extends javax.swing.JFrame {
             datos.addValue(num, "Amount", prov);
         }
         
-        barras = ChartFactory.createLineChart("People per generation named"+ nombre, 
+        barras = ChartFactory.createLineChart("People per generation named "+ nombre, 
                 "Age", "Amount", datos, PlotOrientation.VERTICAL, true, true, true);
         grafico();
         
