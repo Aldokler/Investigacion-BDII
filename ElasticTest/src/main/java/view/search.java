@@ -30,7 +30,7 @@ public class search extends javax.swing.JFrame {
     public void setListPeople(List<Person> people){
           this.model= new DefaultListModel<>();
           for (Person person : people) {
-            this.model.addElement(person.getId()+ "  " +person.getName());
+            this.model.addElement(person.getId()+ "  " + person.getName() + " " + person.getLastname());
         }
         System.out.println(this.model.size());
     }
@@ -58,6 +58,7 @@ public class search extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         idtext = new javax.swing.JTextField();
         nametext = new javax.swing.JTextField();
+        searchBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,18 +82,27 @@ public class search extends javax.swing.JFrame {
         jLabel5.setText("Name:");
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel6.setText("Birth Year");
+        jLabel6.setText("Birth Year:");
 
         jLabel1.setBackground(new java.awt.Color(0, 153, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("   Search People");
         jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        searchBtn1.setBackground(new java.awt.Color(204, 204, 204));
+        searchBtn1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        searchBtn1.setText("Statistics");
+        searchBtn1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        searchBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -111,13 +121,19 @@ public class search extends javax.swing.JFrame {
                             .addComponent(yearText, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(idtext, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nametext, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(searchBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchBtn1)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(idtext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,24 +180,49 @@ public class search extends javax.swing.JFrame {
         }
         else if (!(nametext.getText().equals(""))){
             List<Person> people = Elastic.findByName(nametext.getText());
-            people peopleWindow = new people();
-            setListPeople(people);
-            peopleWindow.setList(this.model);
-            peopleWindow.setVisible(true);
+            if(!people.isEmpty()){
+                people peopleWindow = new people();
+                setListPeople(people);
+                peopleWindow.setList(this.model);
+                peopleWindow.setResultsN(people.size());
+                peopleWindow.setVisible(true);
+                this.setVisible(false);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "No results for this name");
+             
             
         }
-        else if(!(yearText.getText().equals(""))){
-            List<Person> people = Elastic.findByAge(yearText.getText());
-            people peopleWindow = new people();
-            setListPeople(people);
-            peopleWindow.setList(this.model);
-            peopleWindow.setVisible(true);
+        else if(!(yearText.getText().equals("")) && yearText.getText().matches("[0-9]+")){
+            if(Integer.parseInt(yearText.getText()) <= 1929)
+                JOptionPane.showMessageDialog(null, "No results for the given year");
+            else{
+                List<Person> people = Elastic.findByYear(yearText.getText());
+                if(!people.isEmpty()){
+                    System.out.println(people.size());
+                    people peopleWindow = new people();
+                    setListPeople(people);
+                    peopleWindow.setResultsN(people.size());
+                    peopleWindow.setList(this.model);
+                    peopleWindow.setVisible(true);
+                    this.setVisible(false);
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "No results for the given year");
+            }    
+            
         }
     
     
            
         
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void searchBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn1ActionPerformed
+        Statistics w = new Statistics();
+        w.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_searchBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +269,7 @@ public class search extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nametext;
     private javax.swing.JButton searchBtn;
+    private javax.swing.JButton searchBtn1;
     private javax.swing.JTextField yearText;
     // End of variables declaration//GEN-END:variables
 }

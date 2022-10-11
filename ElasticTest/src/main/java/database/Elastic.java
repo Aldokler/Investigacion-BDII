@@ -183,8 +183,8 @@ public class Elastic {
     }
    
     //1930 a 2020
-    //Funcion que retorna las personas que nacieron en el año age
-    public static List<Person> findByAge (String age){
+    //Funcion que retorna las personas que nacieron en el año dado
+    public static List<Person> findByYear (String year){
             List<Person> results = new ArrayList<>();
             try{
                 SearchResponse<Person> response = client.search(s -> s
@@ -193,7 +193,7 @@ public class Elastic {
                     .query(q -> q      
                         .match(t -> t   
                             .field("birthdate")  
-                            .query(age)
+                            .query(year)
                         )
                     ),
                     Person.class      
